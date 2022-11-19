@@ -80,67 +80,65 @@ def compare_files():
     else:
         components2_text.configure(text="Files contain the same components.")
 
+    intersection = components_1.intersection(components_2)
+    if intersection:
+        components3_text.configure(text="Components found on both files:")
+        for dependency in intersection:
+            text_for_file_3.insert('end -1 chars', dependency + '\n')
+    else:
+        components3_text.configure(text="No components found on both files.")
+
 
 root = Tk()
 root.title('CDX vs CDX')
-content = Frame(root)
 
-# Load buttons
-load_file_button_1_frame = Frame(content, width=50)
-load_file_button_2_frame = Frame(content, width=50)
-load_file_1_button = Button(load_file_button_1_frame, text="Load file 1", command=load_file_1)
-load_file_2_button = Button(load_file_button_2_frame, text="Load file 2", command=load_file_2)
+# Left and right frames
+left_frame = Frame(root, width=200, height=500)
+left_frame.grid(column=0, row=0, padx=10, pady=5, sticky='N')
+
+right_frame = Frame(root, width=650, height=500)
+right_frame.grid(column=1, row=0, padx=10, pady=5, sticky='N')
+
+# Left frame
+# Buttons
+load_file_1_button = Button(left_frame, text="Load file 1", command=load_file_1, height=1)
+load_file_2_button = Button(left_frame, text="Load file 2", command=load_file_2, height=1)
+compare_files_button = Button(left_frame, text="Compare files", command=compare_files, height=1)
+
+load_file_1_button.grid(column=0, row=0)
+load_file_2_button.grid(column=1, row=0)
+compare_files_button.grid(column=2, row=0)
 
 # File 1 details
-file1_text_frame = Frame(content, width=50)
-file1_text = Text(file1_text_frame, width=50, height=15, relief=tkinter.GROOVE)
+file1_text = Text(left_frame, width=40, height=12, relief=tkinter.GROOVE)
+
+file1_text.grid(column=0, row=2, columnspan=3)
 
 # File 2 details
-file2_text_frame = Frame(content, width=50)
-file2_text = Text(file2_text_frame, width=50, height=15, relief=tkinter.GROOVE)
+file2_text = Text(left_frame, width=40, height=12, relief=tkinter.GROOVE)
 
+file2_text.grid(column=0, row=3, columnspan=3)
+
+# Right frame
 # Components text 1
-components1_text_frame = Frame(content, width=50, height=500)
-components1_text = Label(components1_text_frame, width=50)
-text_for_file_1 = Text(components1_text_frame, width=50)
+components1_text = Label(right_frame, height=1)
+text_for_file_1 = Text(right_frame, width=50, height=12)
 
-# Components text 2
-components2_text_frame = Frame(content, width=50, height=500)
-components2_text = Label(components2_text_frame, width=50)
-text_for_file_2 = Text(components2_text_frame, width=50)
+components1_text.grid(column=0, row=0)
+text_for_file_1.grid(column=0, row=1)
 
-# Comparison frame
-compare_frame = Frame(content, width=10, height=10)
-compare_files_button = Button(compare_frame, text="Compare files", command=compare_files)
+# # Components text 2
+components2_text = Label(right_frame, height=1)
+text_for_file_2 = Text(right_frame, width=50, height=12)
 
-# # Geometry
-content.pack()
+components2_text.grid(column=0, row=2)
+text_for_file_2.grid(column=0, row=3)
 
-# Load buttons
-load_file_button_1_frame.grid(column=0, row=0, pady=5)
-load_file_1_button.grid(column=0, row=0, sticky='W')
+# # Components text 3
+components3_text = Label(right_frame)
+text_for_file_3 = Text(right_frame, width=50, height=24)
 
-load_file_button_2_frame.grid(column=2, row=0, pady=5)
-load_file_2_button.grid(column=2, row=0, sticky='E')
-
-# File text
-file1_text_frame.grid(column=0, row=1)
-file1_text.grid(column=0, row=1)
-
-file2_text_frame.grid(column=2, row=1)
-file2_text.grid(column=2, row=1)
-
-# Components text
-components1_text_frame.grid(column=0, row=3, pady=10)
-components1_text.grid(column=0, row=3)
-text_for_file_1.grid(column=0, row=4)
-
-components2_text_frame.grid(column=2, row=3, pady=10)
-components2_text.grid(column=2, row=3)
-text_for_file_2.grid(column=2, row=4)
-
-# Comparison
-compare_frame.grid(column=1, row=3)
-compare_files_button.grid(column=1, row=3)
+components3_text.grid(column=1, row=0)
+text_for_file_3.grid(column=1, row=1, rowspan=3)
 
 root.mainloop()
