@@ -1,6 +1,7 @@
 # CDX vs CDX
 
-Compare two CycloneDX files and see which components each one have that the other does not have.
+Compare two CycloneDX files in JSON format. See which components each one have that 
+the other does not have and which components both have in common.
 
 ![screenshot of application](cdx-vs-cdx.png "Screenshot")
 
