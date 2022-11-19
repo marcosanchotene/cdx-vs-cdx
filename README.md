@@ -10,7 +10,7 @@ the other does not have and which components both have in common.
 ## Option 1
 ### Currently only for Linux
 
-Download the compressed file on the releases page, uncompress it and run the executable `cdx-vs-cdx`.
+Download the executable file `cdx-vs-cdx` on the releases page and run it.
 
 ## Prerequisites for options 2 and 3
 
